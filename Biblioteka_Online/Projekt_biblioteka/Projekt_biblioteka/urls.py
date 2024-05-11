@@ -1,5 +1,5 @@
 """
-URL configuration for Biblioteka_Online project.
+URL configuration for Projekt_biblioteka project.
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/5.0/topics/http/urls/
@@ -15,10 +15,11 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import include, path
+from django.urls import path, include
 
 urlpatterns = [
-    path("polls/", include("polls.urls")),
-    path("admin/", admin.site.urls),
-    path("templates/"), 
+    path('admin/', admin.site.urls),
+    path('', include('książki.urls')),
 ]
+
+

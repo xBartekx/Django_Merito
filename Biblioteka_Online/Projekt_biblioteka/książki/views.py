@@ -1,9 +1,11 @@
 from django.shortcuts import render, redirect
 from .models import Book
+from django.http import HttpResponse
+from django.template import loader
 
 def book_list(request):
     books = Book.objects.all()
-    return render(request, 'book_list.html', {'books': books})
+    return render(request, 'książki/book_list.html', {'books': books})
 
 def add_book(request):
     if request.method == 'POST':
@@ -13,9 +15,12 @@ def add_book(request):
         published_date = request.POST['published_date']
         Book.objects.create(title=title, author=author, genre=genre, published_date=published_date)
         return redirect('book_list')
-    return render(request, 'add_book.html')
+    return render(request, 'książki/add_book.html')
 
 def delete_book(request, book_id):
     Book.objects.get(id=book_id).delete()
     return redirect('book_list')
 
+
+
+# Create your views here.
