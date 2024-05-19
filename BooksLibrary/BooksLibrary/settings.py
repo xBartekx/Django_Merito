@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 """
 Django settings for BooksLibrary project.
 
@@ -38,7 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django_registration',
+    'django_registration',              # - dodanie aplikacji zarządzającej użytkownikami
 ]
 
 MIDDLEWARE = [
@@ -123,3 +125,9 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# django-registration
+REGISTRATION_AUTO_LOGIN = True  # automatyczne logowanie po rejestracji
+LOGIN_REDIRECT_URL = '/BOOKS/'  # strona docelowa po zalogowaniu
+LOGIN_URL = '/konta/login/'  # strona logowania
+LOGOUT_REDIRECT_URL = '/'  # strona docelowa po wylogowaniu
