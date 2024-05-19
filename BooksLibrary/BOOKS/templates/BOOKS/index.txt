@@ -1,2 +1,0 @@
-<h1>Biblioteka On-Line</h1>
-<p>{{ komunikat }}</p>
