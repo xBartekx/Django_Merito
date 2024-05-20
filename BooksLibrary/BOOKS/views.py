@@ -3,6 +3,9 @@ from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import logout
 from django.shortcuts import redirect
+from .models import Books
+from django.contrib.auth.decorators import login_required
+from .forms import BookForm
 
 
 def index(request):
@@ -56,3 +59,25 @@ def login_view(request):
     else:
         form = AuthenticationForm()
     return render(request, 'registration/login.html', {'form': form})
+
+def book_list(request):
+    books = Books.objects.all()
+    return render(request, 'books/book_list.html', {'books': books})
+
+@login_required
+def book_list(request):
+    books = Books.objects.filter(user=request.user)
+    return render(request, 'BOOKS/book_list.html', {'books': books})
+
+@login_required
+def add_book(request):
+    if request.method == 'POST':
+        form = BookForm(request.POST)
+        if form.is_valid():
+            book = form.save(commit=False)
+            book.user = request.user
+            book.save()
+            return redirect('book_list')
+    else:
+        form = BookForm()
+    return render(request, 'BOOKS/add_book.html', {'form': form})

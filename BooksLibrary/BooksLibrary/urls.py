@@ -24,4 +24,6 @@ urlpatterns = [
     re_path(r'^BOOKS/', include('BOOKS.urls')),
     re_path(r'^konta/', include('registration.backends.simple.urls')),
     re_path(r'^admin/', admin.site.urls),
+    path('', include('BOOKS.urls', namespace='BOOKS')),  
+    path('accounts/', include('django.contrib.auth.urls')),
 ]

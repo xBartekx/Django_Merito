@@ -18,11 +18,13 @@ class Books(models.Model):
         (MEDIUM, 'personalizowana'),
         (SMALL, 'miękka'),
     )
-    nazwa = models.CharField(verbose_name='Książka', max_length=50)
+    tytuł = models.CharField(verbose_name='Tytuł', max_length=50, default='Unknown Title')
+    autor = models.CharField(verbose_name='Autor', max_length=50, default='Unknown Author')
     opis = models.TextField(blank=True, help_text='Opis Książki')
     okładka = models.CharField(max_length=1, choices=OKŁADKA, default=LARGE)
     cena = models.DecimalField(max_digits=5, decimal_places=2)
-    data = models.DateField('Data wydania', auto_now_add=True)
+    data = models.DateField('Data wydania')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='books')
 
     def __unicode__(self):
         return u'%s' % (self.nazwa)
