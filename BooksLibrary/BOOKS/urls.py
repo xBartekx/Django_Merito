@@ -13,8 +13,9 @@ urlpatterns = [
     path('konta/logout/', auth_views.LogoutView.as_view(), name='logout'),
     path('konta/register/', views.register, name='register'),
     path('books/', views.book_list, name='book_list'),
-    path('books/', views.book_list, name='book_list'),
     path('books/add/', views.add_book, name='add_book'),
+    path('books/update/<int:pk>/', views.update_book, name='update_book'),
+    path('books/delete/<int:pk>/', views.delete_book, name='delete_book'),
 ]
 
 

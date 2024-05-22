@@ -1,0 +1,18 @@
+<!-- BOOKS/templates/BOOKS/delete_book.html -->
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Usuń Książkę</title>
+</head>
+<body>
+    <h1>Usuń Książkę</h1>
+    <p>Czy na pewno chcesz usunąć książkę "{{ book.tytuł }}"?</p>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Usuń</button>
+    </form>
+    <a href="{% url 'BOOKS:book_list' %}">Powrót do listy książek</a>
+</body>
+</html>

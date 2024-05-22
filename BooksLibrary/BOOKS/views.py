@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import logout
@@ -6,6 +6,7 @@ from django.shortcuts import redirect
 from .models import Books
 from django.contrib.auth.decorators import login_required
 from .forms import BookForm
+from django.core.exceptions import ValidationError
 
 
 def index(request):
@@ -72,12 +73,41 @@ def book_list(request):
 @login_required
 def add_book(request):
     if request.method == 'POST':
-        form = BookForm(request.POST)
-        if form.is_valid():
-            book = form.save(commit=False)
-            book.user = request.user
-            book.save()
-            return redirect('book_list')
+        form = BookForm(request.POST, request.FILES)
+        try:
+            if form.is_valid():
+                book = form.save(commit=False)
+                book.user = request.user
+                book.save()
+                return redirect('BOOKS:book_list')
+        except ValidationError as e:
+            form.add_error(None, str(e))
     else:
         form = BookForm()
-    return render(request, 'BOOKS/add_book.html', {'form': form})
+    return render(request, 'books/add_book.html', {'form': form})
+
+@login_required
+def update_book(request, pk):
+    book = get_object_or_404(Books, pk=pk)
+    if request.method == 'POST':
+        form = BookForm(request.POST, request.FILES, instance=book)
+        try:
+            if form.is_valid():
+                form.save()
+                return redirect('BOOKS:book_list')
+        except ValidationError as e:
+            form.add_error(None, str(e))
+    else:
+        form = BookForm(instance=book)
+    return render(request, 'books/update_book.html', {'form': form})
+
+@login_required
+def delete_book(request, pk):
+    book = get_object_or_404(Books, pk=pk)
+    if request.method == 'POST':
+        try:
+            book.delete()
+            return redirect('BOOKS:book_list')
+        except Exception as e:
+            return render(request, 'books/book_list.html', {'error': str(e)})
+    return render(request, 'books/delete_book.html', {'book': book})
