@@ -111,3 +111,7 @@ def delete_book(request, pk):
         except Exception as e:
             return render(request, 'books/book_list.html', {'error': str(e)})
     return render(request, 'books/delete_book.html', {'book': book})
+
+
+
+
