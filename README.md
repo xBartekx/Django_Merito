@@ -10,6 +10,8 @@ a) Interfejs zawiera funkcjonalności:
 - Dodawanie zasobów 
 - Usuwanie zasobów 
 - Aktualizacja zasobów 
+- Dodawanie Recenzji
+- Wyświetlanie Recenzji
 - Wyświetlanie informacji o istniejących zasobach
 - komunikacja z użytkownikiem i wprowadzania danych z klawiatury wraz z ich weryfikacją
 - szereg możliwość i restrykcji odnośnie wprowadzania różnych typów danych
@@ -19,6 +21,7 @@ c) Projekt wykorzystuje odpowiednio skonfigurowaną i przystosowaną bazę danyc
 - Dodawanie obiektu do bazy 
 - Usuwanie obiektu z bazy 
 - Aktualizacja obiektu w bazie 
+- Dodawanie recenzji do bazy
 - Pobieranie wszystkich obiektów z bazy i wyświetlanie w formie listy dla użytkownika 
 - Tabele mają określone (i dodatkowo opisane w skrypcie) typy danych, które są przechowywany w ich poszczególnych kolumnach
 d) Testy:
@@ -46,3 +49,4 @@ Historia najważniejszych "commitów" wykonywanych podczas tworzenia projektu:
 7. Przesłanie drobnych poprawek i ulepszeń dotyczących szroko pojętego wyglądu poszczególnych stron i formularzy
 8. Commit z ostatecznymi poprawkami oraz dodatkowymi funkcjami. Ponadto zoptymalizowano i powiązano ze sobą poszczególne skrypty oraz szblony aby 
 całość pozwalała na płynne wykorzystanie wszystkich zaimplementowanych mechanik i funkcjonalności pozwalając użytkowikom na stabilne i regularne korzystanie z jego własnej listy zapisanych książek w Bibioltece On-line.  
+9. Commit dodający klasę Review zajmującą się recenzjami książek, użytkownik może dodawać oraz wyświetleć recenzje, które widzą inni użytkownicy. Recenzje składają się z: Tytułu recenzji, Treści recenzji oraz Oceny. Dodano testy do klasy review oraz test parametryczny testujący dodawanie ocen od 1 do 5.
