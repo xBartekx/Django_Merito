@@ -3,11 +3,11 @@ from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import logout
 from django.shortcuts import redirect
-from .models import Books
+from .models import Books, Review
 from django.contrib.auth.decorators import login_required
-from .forms import BookForm
+from .forms import BookForm, ReviewForm
 from django.core.exceptions import ValidationError
-
+from django.contrib.auth.models import User
 
 def index(request):
     return render(request, 'BOOKS/index.html')
@@ -112,6 +112,28 @@ def delete_book(request, pk):
             return render(request, 'books/book_list.html', {'error': str(e)})
     return render(request, 'books/delete_book.html', {'book': book})
 
+@login_required
+def book_detail(request, book_id):
+    book = get_object_or_404(Books, id=book_id)
+    reviews = Review.objects.filter(książka=book)
+    context = {
+        'book': book,
+        'reviews': reviews
+    }
+    return render(request, 'books/book_detail.html', context)
 
-
-
+@login_required
+def add_review(request, book_id):
+    book = get_object_or_404(Books, pk=book_id)
+    if request.method == 'POST':
+        form = ReviewForm(request.POST)
+        if form.is_valid():
+            review = form.save(commit=False)
+            review.książka = book
+            review.użytkownik = request.user
+            review.autor = request.user
+            review.save()
+            return redirect('BOOKS:book_detail', book_id=book_id)
+    else:
+        form = ReviewForm()
+    return render(request, 'books/add_review.html', {'form': form, 'book': book})

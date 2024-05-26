@@ -99,6 +99,7 @@
         <thead>
             <tr>
                 <th>Tytuł</th>
+                <th>Gatunek</th>
                 <th>Autor</th>
                 <th>Data publikacji</th>
                 <th>Okładka</th>
@@ -111,6 +112,7 @@
             {% for book in books %}
             <tr>
                 <td>{{ book.tytuł }}</td>
+                <td>{{ book.gatunek }}</td>
                 <td>{{ book.autor }}</td>
                 <td>{{ book.data }}</td>
                 <td><img src="{{ book.okładka.url }}" alt="Okładka" style="max-width: 60px; max-height: 50px;"></td>
@@ -118,6 +120,8 @@
                 <td>{{ book.cena }}</td>
                 <td class="actions">
                     <a href="{% url 'BOOKS:update_book' book.id %}">Edytuj</a>
+                    <a href="{% url 'BOOKS:add_review' book.id %}">Dodaj Recenzje</a>
+                    <a href="{% url 'BOOKS:book_detail' book.id %}">Recenzje</a>
                     <form method="post" action="{% url 'BOOKS:delete_book' book.id %}" style="display:inline;">
                         {% csrf_token %}
                         <button type="submit">Usuń</button>

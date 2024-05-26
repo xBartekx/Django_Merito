@@ -1,5 +1,5 @@
 from django import forms
-from .models import Books
+from .models import Books, Review
 import datetime
 from django.core.exceptions import ValidationError
 from decimal import Decimal 
@@ -8,7 +8,6 @@ class BookForm(forms.ModelForm):
     class Meta:
         model = Books
         fields = ['tytuł', 'autor', 'data', 'cena', 'opis']
-
 
     def clean(self):
         cleaned_data = super().clean()
@@ -36,3 +35,9 @@ class BookForm(forms.ModelForm):
         if not isinstance(cena, (int, float, Decimal)):
             raise ValidationError("Cena musi być liczbą.")
         return cena
+
+class ReviewForm(forms.ModelForm):
+    class Meta:
+        model = Review
+        fields = ['tytuł', 'treść', 'ocena',]
+

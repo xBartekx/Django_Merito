@@ -3,6 +3,7 @@ from django.contrib import admin
 from . import models
 from django.forms import Textarea
 from django.db.models.fields import TextField
+from .models import Review
 
 
 class GenreInline(admin.TabularInline):
@@ -27,3 +28,4 @@ class BooksAdmin(admin.ModelAdmin):
             obj.autor = request.user
         obj.save()
 
+admin.site.register(Review)

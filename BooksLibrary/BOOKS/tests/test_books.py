@@ -143,4 +143,67 @@ def test_book_list_authenticated(client_logged_in, book):
     assert 'Test Book' in response.content.decode()
 
 
+import pytest
+from .models import Review, Books, User
+
+
+@pytest.mark.django_db
+def test_create_review():
+    user = User.objects.create(username='testuser')
+    book = Books.objects.create(title='Test Book', author='Test Author')
+
+    review = Review.objects.create(
+        książka=book,
+        użytkownik=user,
+        tytuł='Test Review',
+        treść='Lorem ipsum dolor sit amet.',
+        ocena=5
+    )
+
+    saved_reviews = Review.objects.all()
+    assert len(saved_reviews) == 1
+    assert saved_reviews[0].tytuł == 'Test Review'
+    assert saved_reviews[0].książka == book
+    assert saved_reviews[0].użytkownik == user
+
+
+@pytest.mark.django_db
+def test_foreign_key_relationship():
+    user = User.objects.create(username='testuser')
+    book = Books.objects.create(title='Test Book', author='Test Author')
+
+    review = Review.objects.create(
+        książka=book,
+        użytkownik=user,
+        tytuł='Test Review',
+        treść='Lorem ipsum dolor sit amet.',
+        ocena=5
+    )
+
+    assert review.książka == book
+    assert review.użytkownik == user
+
+
+@pytest.mark.django_db
+@pytest.mark.parametrize('ocena', [1, 2, 3, 4, 5])
+def test_create_review_with_different_ratings(ocena):
+    user = User.objects.create(username='testuser')
+    book = Books.objects.create(title='Test Book', author='Test Author')
+
+    review = Review.objects.create(
+        książka=book,
+        użytkownik=user,
+        tytuł=f'Test Review {ocena}',
+        treść='Lorem ipsum dolor sit amet.',
+        ocena=ocena
+    )
+
+    saved_reviews = Review.objects.filter(ocena=ocena)
+    assert len(saved_reviews) == 1
+    assert saved_reviews[0].tytuł == f'Test Review {ocena}'
+    assert saved_reviews[0].książka == book
+    assert saved_reviews[0].użytkownik == user
+    assert saved_reviews[0].ocena == ocena
+
+
 
