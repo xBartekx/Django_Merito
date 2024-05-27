@@ -1,8 +1,14 @@
 # Django_Merito
 Projekt z programowania zaawansowanego: Biblioteka On-line
 
-Języki użyty w projekcie: Python, HTML, CSS
-Framework, na ktorym oparto projekt: Django
+Autorzy:
+
+Bartłomiej Dreko
+Maciej Dudek
+
+Języki użyty w projekcie: Python(v. 3.12.3), HTML, CSS
+
+Framework, na ktorym oparto projekt: Django(v. 5.0.6)
 
 Opis projektu: Jest to początkowy i ogólny zarys strony internetowej mogącej docelowo zyskać wiele nowych funkcjonalności w miarę rozwoju projektu. Wersja ta jest "demem" Biblioteki On-line a konkretnie jednym z jej modułów, który służy do tego aby zalogowany użytkownik mógł wprowadzać książki do swojej prywatnej kolekcji przeczytanych tytułów. Skupiono się na osiągnięciu wymagań podanych w instrukcjach laboratoryjnych. Poniżej spis zrealizowanych celów:
 
@@ -16,7 +22,9 @@ a) Interfejs zawiera funkcjonalności:
 - komunikacja z użytkownikiem i wprowadzania danych z klawiatury wraz z ich weryfikacją
 - szereg możliwość i restrykcji odnośnie wprowadzania różnych typów danych
 - obsługa błędów (try: ...except...) wraz z wyświetlanym komunikatem
+
 b) Strona posiada zaimplementowany i w pełni funkcjonalny system administracyjny oraz funkcje rejestracji lub logowania użytkownika
+
 c) Projekt wykorzystuje odpowiednio skonfigurowaną i przystosowaną bazę danych db.sqlite3, która umożliwia:
 - Dodawanie obiektu do bazy 
 - Usuwanie obiektu z bazy 
@@ -24,8 +32,10 @@ c) Projekt wykorzystuje odpowiednio skonfigurowaną i przystosowaną bazę danyc
 - Dodawanie recenzji do bazy
 - Pobieranie wszystkich obiektów z bazy i wyświetlanie w formie listy dla użytkownika 
 - Tabele mają określone (i dodatkowo opisane w skrypcie) typy danych, które są przechowywany w ich poszczególnych kolumnach
-d) Testy:
-- 
+
+d) Do projektu dopisano testy z wykorzystaniem modułu "pytest". Są to:
+- Klasyczne testy do sprawdzenia ogólnej funcjonalności interfejsu i komunikacji z bazą danych a także testy poszczególnych klas
+- Testy parametryczne 
 
 
 
